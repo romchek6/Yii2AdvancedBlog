@@ -17,6 +17,7 @@ use Yii;
  * @property int|null $hits
  * @property int|null $category_id
  *
+ * @property Author $author
  * @property Category $category
  */
 class Articles extends \yii\db\ActiveRecord
@@ -40,6 +41,7 @@ class Articles extends \yii\db\ActiveRecord
             [['title', 'alias', 'likes'], 'string', 'max' => 200],
             [['text'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
@@ -57,8 +59,19 @@ class Articles extends \yii\db\ActiveRecord
             'date' => 'Date',
             'likes' => 'Likes',
             'hits' => 'Hits',
+            'keywords' =>'Keywords',
             'category_id' => 'Category ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Author]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(Author::class, ['id' => 'author_id']);
     }
 
     /**
@@ -70,4 +83,27 @@ class Articles extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
+
+    public function getPopular(){
+
+        return $this->find()->orderBy('hits desc')->limit(3)->with('author')->all();
+
+    }
+
+    public function getCountArticles(){
+
+        return Yii::$app->db->createCommand("SELECT category.id, category.name , category.alias , COUNT(articles.id) as count
+        FROM category
+        JOIN articles
+        ON articles.category_id = category.id
+        GROUP BY category.id")->queryAll();
+
+    }
+
+    public function getOne($id){
+
+        return $this->find()->where(['id' => $id])->one();
+
+    }
+
 }

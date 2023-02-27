@@ -46,9 +46,9 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => 'blog/index',
+                'article/<id:\d>' => 'blog/article',
+                'category/<alias:[a-zA-Z]+>' => 'blog/category',
                 '<controller:[a-zA-Z]+>/<action:[a-zA-Z]+>/' => '<controller>/<action>',
-//                'articles' => 'articles/articles',
-//                'article/<id:\d+>' => 'articles/article',
             ],
         ],
 

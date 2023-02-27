@@ -8235,9 +8235,7 @@ h1, h2, h3, h4, h5,
       color: #000000;
       overflow: hidden;
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       -moz-background-clip: text;
-      -moz-text-fill-color: transparent;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center; }
@@ -8302,6 +8300,7 @@ h1, h2, h3, h4, h5,
             -o-transform: scaleX(1);
             transform: scaleX(1); }
   #colorlib-aside .colorlib-footer {
+    height: 200px;
     position: absolute;
     bottom: 20px;
     left: 0;
@@ -8314,7 +8313,9 @@ h1, h2, h3, h4, h5,
       font-size: 18px;
       font-weight: 600; }
     #colorlib-aside .colorlib-footer a {
-      color: #000000; }
+      color: #000000;
+      font-size: 80px;
+    }
     #colorlib-aside .colorlib-footer .pfooter {
       font-size: 14px; }
     #colorlib-aside .colorlib-footer .colorlib-subscribe-form {
