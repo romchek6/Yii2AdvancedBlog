@@ -45,10 +45,10 @@ AppAsset::register($this);
     <?= $content ?>
     <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
         <div class="sidebar-box pt-md-4">
-            <form action="#" class="search-form">
+            <form action="<?= \yii\helpers\Url::to(['search']) ?>" method="get" class="search-form">
                 <div class="form-group">
                     <span class="icon icon-search"></span>
-                    <input type="text" class="form-control" placeholder="Введите слово и нажмите enter">
+                    <input type="text" class="form-control" name="query" placeholder="Введите слово и нажмите enter">
                 </div>
             </form>
         </div>

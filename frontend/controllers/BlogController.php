@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Articles;
 use common\models\Author;
 use common\models\Category;
+use common\models\Comment;
 use yii\data\Pagination;
 use yii\web\Controller;
 use Yii;
@@ -62,6 +63,18 @@ class BlogController extends Controller
 
     public function actionArticle($id){
 
+        $model = new Comment();
+
+        if($model ->load(Yii::$app->request->post()) && $model->save()){
+
+            Yii::$app->session->setFlash('123465');
+
+            return $this->refresh();
+
+        }
+
+        $comments = $model->find()->where(['article_id' => $id])->orderBy('date asc')->all();
+
         $art = new Articles();
 
         $aut = new Author();
@@ -76,9 +89,26 @@ class BlogController extends Controller
 
         $keywords = explode('|',$article->keywords);
 
-        return $this->render('single', compact('article' , 'keywords','author'));
+        return $this->render('single', compact('article' , 'keywords','author' , 'model' , 'comments'));
 
     }
 
+    public function actionSearch($query){
+
+        $query = Articles::find()
+            ->where(['like' , 'keywords' , $query])
+            ->orFilterWhere(['like', 'text',$query])
+            ->orFilterWhere(['like', 'title',$query])
+            ->with('category')
+            ->with('author')
+            ->orderBy('date DESC');
+
+        $pages = new Pagination(['totalCount' => $query->count() , 'pageSize' => 10,'forcePageParam' => false , 'pageSizeParam' => false]);
+
+        $models = $query->offset($pages->offset)->limit($pages->limit)->all();
+
+        return $this->render('index' , compact('models' , 'pages'));
+
+    }
 
 }

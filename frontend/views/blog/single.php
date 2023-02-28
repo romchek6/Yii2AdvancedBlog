@@ -11,7 +11,7 @@
                             <div class="tagcloud">
                                 <?php if(!empty($keywords)): ?>
                                     <?php foreach ($keywords as $keyword): ?>
-                                        <a href="<?= \yii\helpers\Url::to(["articles/$keyword"]) ?>" class="tag-cloud-link"><?= $keyword ?></a>
+                                        <a href="/search?query=<?= $keyword ?>" class="tag-cloud-link"><?= $keyword ?></a>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
@@ -31,112 +31,43 @@
                         <div class="pt-5 mt-5">
                             <h3 class="mb-5 font-weight-bold">6 Comments</h3>
                             <ul class="comment-list">
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="images/person_1.jpg" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-                                </li>
-
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="images/person_1.jpg" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-
-                                    <ul class="children">
+                                <?php if(!empty($comments)): ?>
+                                    <?php foreach ($comments as $comment): ?>
                                         <li class="comment">
                                             <div class="vcard bio">
                                                 <img src="images/person_1.jpg" alt="Image placeholder">
                                             </div>
                                             <div class="comment-body">
-                                                <h3>John Doe</h3>
-                                                <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                <p><a href="#" class="reply">Reply</a></p>
+                                                <h3><?= $comment->name ?></h3>
+                                                <div class="meta"><?= Yii::$app->formatter->asDate($comment->date) ?></div>
+                                                <p><?= $comment->text ?></p>
                                             </div>
-
-
-                                            <ul class="children">
-                                                <li class="comment">
-                                                    <div class="vcard bio">
-                                                        <img src="images/person_1.jpg" alt="Image placeholder">
-                                                    </div>
-                                                    <div class="comment-body">
-                                                        <h3>John Doe</h3>
-                                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                        <p><a href="#" class="reply">Reply</a></p>
-                                                    </div>
-
-                                                    <ul class="children">
-                                                        <li class="comment">
-                                                            <div class="vcard bio">
-                                                                <img src="images/person_1.jpg" alt="Image placeholder">
-                                                            </div>
-                                                            <div class="comment-body">
-                                                                <h3>John Doe</h3>
-                                                                <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                                <p><a href="#" class="reply">Reply</a></p>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
                                         </li>
-                                    </ul>
-                                </li>
-
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="images/person_1.jpg" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-                                </li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </ul>
                             <!-- END comment-list -->
 
                             <div class="comment-form-wrap pt-5">
-                                <h3 class="mb-5">Leave a comment</h3>
-                                <form action="#" class="p-3 p-md-5 bg-light">
-                                    <div class="form-group">
-                                        <label for="name">Name *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email *</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="website">Website</label>
-                                        <input type="url" class="form-control" id="website">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="message">Message</label>
-                                        <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                                    </div>
-
-                                </form>
+                                <h3 class="mb-5">Оставьте свой коментарий</h3>
+                                <?php $form = \yii\widgets\ActiveForm::begin([
+                                    'id' => 'comment-form',
+                                    'options' => ['class' => 'p-3 p-md-5 bg-light'],
+                                ]) ?>
+                                <?= $form->field($model, 'article_id',['template' => '{input}'])->hiddenInput(['value'=>$article->id]) ?>
+                                <div class="form-group">
+                                    <?= $form->field($model , 'name')->input('text' , ['class' => 'form-control']) ?>
+                                </div>
+                                <div class="form-group">
+                                    <?= $form->field($model , 'email')->input('email' , ['class' => 'form-control']) ?>
+                                </div>
+                                <div class="form-group">
+                                    <?= $form->field($model , 'text')->textarea(['rows' => '6' , 'class'=> 'form-control', 'style' => ['resize' => 'none']])?>
+                                </div>
+                                <div class="form-group">
+                                    <?= \yii\helpers\Html::submitButton('Отправить', ['class' => 'btn py-3 px-4 btn-primary']) ?>
+                                </div>
+                                <?php \yii\widgets\ActiveForm::end() ?>
                             </div>
                         </div>
                     </div><!-- END-->

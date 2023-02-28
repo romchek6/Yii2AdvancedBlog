@@ -47,6 +47,7 @@ return [
             'rules' => [
                 '/' => 'blog/index',
                 'article/<id:\d>' => 'blog/article',
+                'search' => 'blog/search',
                 'category/<alias:[a-zA-Z]+>' => 'blog/category',
                 '<controller:[a-zA-Z]+>/<action:[a-zA-Z]+>/' => '<controller>/<action>',
             ],
