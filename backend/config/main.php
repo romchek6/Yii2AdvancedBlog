@@ -10,7 +10,9 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'name' => 'Админочка',
     'bootstrap' => ['log'],
+    'layout' => 'main',
     'modules' => [],
     'components' => [
         'request' => [

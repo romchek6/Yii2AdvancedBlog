@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string|null $name
  * @property string|null $text
  * @property int|null $date
+ * @property int|null $visible
  *
  * @property Articles $article
  */
@@ -29,6 +30,13 @@ class Comment extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['date'],
                 ],
                 'value' => time()
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['visible'],
+                ],
+                'value' => 0
             ]
         ];
 
@@ -49,7 +57,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['text' , 'name' , 'email'], 'required' ],
-            [['article_id', 'date'], 'integer'],
+            [['article_id', 'date' , 'visible'], 'integer'],
             [['text' , 'name' , 'email'], 'string' ],
             [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articles::class, 'targetAttribute' => ['article_id' => 'id']],
         ];
@@ -66,7 +74,8 @@ class Comment extends \yii\db\ActiveRecord
             'text' => 'Сообщение',
             'date' => 'Date',
             'name' => 'Имя',
-            'email' => 'E-mail'
+            'email' => 'E-mail',
+            'visible' => 'Видимость'
         ];
     }
 

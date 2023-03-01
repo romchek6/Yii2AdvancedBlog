@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\Articles;
+use common\models\Author;
 use common\models\LoginForm;
 use Yii;
 use yii\filters\VerbFilter;
@@ -62,6 +64,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+        $articles = new Articles();
+
+        $author = new Author();
+
+
+
         return $this->render('index');
     }
 

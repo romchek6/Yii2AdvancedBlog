@@ -16,6 +16,7 @@ use Yii;
  * @property string|null $likes
  * @property int|null $hits
  * @property int|null $category_id
+ * @property string|null $keywords
  *
  * @property Author $author
  * @property Category $category
@@ -39,7 +40,7 @@ class Articles extends \yii\db\ActiveRecord
             [['author_id', 'hits', 'category_id'], 'integer'],
             [['date'], 'safe'],
             [['title', 'alias', 'likes'], 'string', 'max' => 200],
-            [['text'], 'string', 'max' => 255],
+            [['text', 'keywords'], 'string'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['author_id' => 'id']],
         ];

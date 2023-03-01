@@ -73,7 +73,9 @@ class BlogController extends Controller
 
         }
 
-        $comments = $model->find()->where(['article_id' => $id])->orderBy('date asc')->all();
+        $comments = $model->find()->where(['article_id' => $id , 'visible' => 1])->orderBy('date asc')->all();
+
+        $count = $model->find()->where(['article_id' => $id , 'visible' => 1])->orderBy('date asc')->count();
 
         $art = new Articles();
 
@@ -89,7 +91,7 @@ class BlogController extends Controller
 
         $keywords = explode('|',$article->keywords);
 
-        return $this->render('single', compact('article' , 'keywords','author' , 'model' , 'comments'));
+        return $this->render('single', compact('article' , 'keywords','author' , 'model' , 'comments' , 'count'));
 
     }
 

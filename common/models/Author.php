@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string|null $name
+ * @property string|null $about
  *
  * @property Articles[] $articles
  */
@@ -29,6 +30,7 @@ class Author extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'string', 'max' => 255],
+            [['about'] , 'string']
         ];
     }
 

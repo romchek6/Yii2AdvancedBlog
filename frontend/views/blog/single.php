@@ -29,7 +29,7 @@
                         <?php endif; ?>
 
                         <div class="pt-5 mt-5">
-                            <h3 class="mb-5 font-weight-bold">6 Comments</h3>
+                            <h3 class="mb-5 font-weight-bold"><?= $count ?> Комментариев</h3>
                             <ul class="comment-list">
                                 <?php if(!empty($comments)): ?>
                                     <?php foreach ($comments as $comment): ?>
